@@ -66,7 +66,7 @@ resource "google_container_cluster" "primary" {
     ]
 
     tags = [
-      "${var.owner}-gke-2"
+      "${var.owner}-gke"
     ]
   }
 }
