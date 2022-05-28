@@ -2,7 +2,7 @@
 #   account_id = var.service_account
 # }
 # # Collect client config for GCP
-# Esto es de prueba
+
 data "google_client_config" "current" {
 }
 
