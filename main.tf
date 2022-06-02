@@ -28,6 +28,7 @@ data "google_container_engine_versions" "k8sversion" {
 }
 
 resource "google_container_cluster" "primary" {
+	# checkov:skip=BC_GCP_KUBERNETES_26: ADD REASON
   # provider = google-beta
   # project = var.gcp_project
   name     = var.gke_cluster
