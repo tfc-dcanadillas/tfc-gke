@@ -2,6 +2,11 @@
 #   account_id = var.service_account
 # }
 # # Collect client config for GCP
+terraform {
+  required_version = ">= 1.1.0"
+  backend "remote" {}
+}
+
 data "google_client_config" "current" {
 }
 
@@ -33,9 +38,6 @@ resource "google_container_cluster" "primary" {
   name     = var.gke_cluster
   location = var.regional_k8s ? var.gcp_region : var.gcp_zone
   node_version = data.google_container_engine_versions.k8sversion.latest_node_version
-  # We can't create a cluster with no node pool defined, but we want to only use
-  # separately managed node pools. So we create the smallest possible default
-  # node pool and immediately delete it.
   remove_default_node_pool = var.default_gke ? false : true
   initial_node_count       = var.default_gke ? var.numnodes : 1
   # network = google_compute_network.vpc_network.self_link
