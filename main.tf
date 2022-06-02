@@ -2,10 +2,12 @@
 #   account_id = var.service_account
 # }
 # # Collect client config for GCP
+
 terraform {
   required_version = ">= 1.1.0"
   backend "remote" {}
 }
+
 
 data "google_client_config" "current" {
 }
