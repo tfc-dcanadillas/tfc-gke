@@ -45,7 +45,7 @@ resource "google_container_cluster" "primary" {
   # network = google_compute_network.vpc_network.self_link
   network = google_compute_network.container_network.0.self_link
   subnetwork = google_compute_subnetwork.container_subnetwork.0.self_link
-  min_master_version = var.k8s_version
+  min_master_version = data.google_container_engine_versions.k8sversion.latest_master_version
   master_auth {
     # username = ""
     # password = ""
