@@ -18,7 +18,7 @@ crash.log
 # version control.
 #
 *.tfvars
-
+**/tfc-api/**
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
 override.tf
@@ -27,6 +27,7 @@ override.tf.json
 *_override.tf.json
 
 backend.hcl
+backend-test.hcl
 
 # This files are not supposed to upload
 ## variables file to edit TFC
