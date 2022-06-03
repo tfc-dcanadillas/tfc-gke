@@ -5,7 +5,10 @@
 data "google_client_config" "current" {
 }
 
-
+terraform {
+  required_version = ">= 1.1.0"
+  backend "remote" {}
+}
 resource "google_compute_network" "container_network" {
   count = var.default_network ? 0 : 1
   name = "${var.gke_cluster}-network"
@@ -28,6 +31,7 @@ data "google_container_engine_versions" "k8sversion" {
 }
 
 resource "google_container_cluster" "primary" {
+	# checkov:skip=BC_GCP_KUBERNETES_26: ADD REASON
   # provider = google-beta
   # project = var.gcp_project
   name     = var.gke_cluster
@@ -41,7 +45,7 @@ resource "google_container_cluster" "primary" {
   # network = google_compute_network.vpc_network.self_link
   network = google_compute_network.container_network.0.self_link
   subnetwork = google_compute_subnetwork.container_subnetwork.0.self_link
-  min_master_version = data.google_container_engine_versions.k8sversion.latest_master_version
+  min_master_version = "1.12"
   master_auth {
     # username = ""
     # password = ""
@@ -51,6 +55,9 @@ resource "google_container_cluster" "primary" {
     }
   }
   node_config {
+    shielded_instance_config {
+      enable_secure_boot = true
+    }
     machine_type = var.node_type
     disk_type = "pd-ssd"
     metadata = {
@@ -69,7 +76,12 @@ resource "google_container_cluster" "primary" {
       "${var.owner}-gke"
     ]
   }
+  enable_intranode_visibility = true
+  network_policy {
+    enabled = true
+  }
 }
+
 
 resource "google_container_node_pool" "primary_nodes" {
   count = var.default_gke ? 0 : 1
