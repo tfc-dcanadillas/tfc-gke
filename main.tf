@@ -31,7 +31,7 @@ data "google_container_engine_versions" "k8sversion" {
 }
 
 resource "google_container_cluster" "primary" {
-	# checkov:skip=BC_GCP_KUBERNETES_26: ADD REASON
+  # New comment
   # provider = google-beta
   # project = var.gcp_project
   name     = var.gke_cluster
@@ -55,9 +55,9 @@ resource "google_container_cluster" "primary" {
     }
   }
   node_config {
-    # shielded_instance_config {
-    #   enable_secure_boot = true
-    # }
+    shielded_instance_config {
+      enable_secure_boot = true
+    }
     machine_type = var.node_type
     disk_type = "pd-ssd"
     metadata = {
@@ -76,8 +76,11 @@ resource "google_container_cluster" "primary" {
       "${var.owner}-gke"
     ]
   }
-  # enable_intranode_visibility = true
-  # network_policy {
+  enable_intranode_visibility = true
+  network_policy {
+    enabled = true
+  }
+  # pod_security_policy_config {
   #   enabled = true
   # }
 }

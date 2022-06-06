@@ -28,3 +28,8 @@ policy "restrict-gke-clusters" {
     source = "./restrict-gke-clusters.sentinel"
     enforcement_level = "advisory"
 }
+
+# policy "bridgecrew" {
+#         source            = "./bridgecrew.sentinel"
+#         enforcement_level = "hard-mandatory"
+# }
