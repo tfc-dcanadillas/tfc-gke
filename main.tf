@@ -55,9 +55,9 @@ resource "google_container_cluster" "primary" {
     }
   }
   node_config {
-    shielded_instance_config {
-      enable_secure_boot = true
-    }
+    # shielded_instance_config {
+    #   enable_secure_boot = true
+    # }
     machine_type = var.node_type
     disk_type = "pd-ssd"
     metadata = {
@@ -76,14 +76,15 @@ resource "google_container_cluster" "primary" {
       "${var.owner}-gke"
     ]
   }
-  enable_intranode_visibility = true
-  network_policy {
-    enabled = true
-  }
+  # enable_intranode_visibility = true
+  # network_policy {
+  #   enabled = true
+  # }
   # pod_security_policy_config {
   #   enabled = true
   # }
 }
+
 
 
 resource "google_container_node_pool" "primary_nodes" {
