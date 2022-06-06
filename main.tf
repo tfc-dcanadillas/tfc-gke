@@ -80,12 +80,9 @@ resource "google_container_cluster" "primary" {
   # network_policy {
   #   enabled = true
   # }
-<<<<<<< HEAD
   # pod_security_policy_config {
   #   enabled = true
   # }
-=======
->>>>>>> e0d397173f30e52e59fc18961eb25a7c0559b498
 }
 
 
