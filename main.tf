@@ -88,6 +88,7 @@ resource "google_container_cluster" "primary" {
   network_policy {
     enabled = true
   }
+  enable_intranode_visibility = true
 }
 
 
