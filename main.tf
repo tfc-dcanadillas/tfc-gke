@@ -31,6 +31,7 @@ data "google_container_engine_versions" "k8sversion" {
 }
 
 resource "google_container_cluster" "primary" {
+  # New comment
   # provider = google-beta
   # project = var.gcp_project
   name     = var.gke_cluster
