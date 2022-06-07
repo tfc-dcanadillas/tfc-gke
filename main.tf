@@ -86,8 +86,8 @@ resource "google_container_cluster" "primary" {
 }
 
 
-
 resource "google_container_node_pool" "primary_nodes" {
+  # New comment
   count = var.default_gke ? 0 : 1
   name       = "${var.gke_cluster}-node-pool"
   location = google_container_cluster.primary.location
