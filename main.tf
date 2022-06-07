@@ -84,6 +84,7 @@ resource "google_container_cluster" "primary" {
   # }
   enable_intranode_visibility = true
 }
+}
 
 
 
