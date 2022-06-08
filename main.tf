@@ -31,7 +31,6 @@ data "google_container_engine_versions" "k8sversion" {
 }
 
 resource "google_container_cluster" "primary" {
-  # New comment
   # provider = google-beta
   # project = var.gcp_project
   name     = var.gke_cluster
@@ -55,6 +54,9 @@ resource "google_container_cluster" "primary" {
     }
   }
   node_config {
+    shielded_instance_config {
+      enable_secure_boot = true
+    }
     # shielded_instance_config {
     #   enable_secure_boot = true
     # }
@@ -83,6 +85,10 @@ resource "google_container_cluster" "primary" {
   # pod_security_policy_config {
   #   enabled = true
   # }
+  enable_intranode_visibility = true
+  network_policy {
+    enabled = true
+  }
 }
 
 
