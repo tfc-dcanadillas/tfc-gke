@@ -85,6 +85,7 @@ resource "google_container_cluster" "primary" {
   # pod_security_policy_config {
   #   enabled = true
   # }
+  enable_intranode_visibility = true
 }
 
 
